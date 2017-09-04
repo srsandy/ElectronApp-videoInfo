@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VideoInfo</title>
+
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		h1 {
+			text-align: center;
+			color: #ff0000;
+			background-color: #ccc;
+			margin-bottom: 30px;
+			font-size: 60px;
+		}
+
+		form {
+			margin: 0 auto;
+			width: 40%;
+		}
+
+		button {
+			height: 30px;
+			width: 60px;
+			margin: 10px 40%;
+			border: 2px solid lightblue;
+			background-color: #000;
+			box-shadow: 1px 1px 1px #ccc;
+			border-radius: 30px;
+			color: #fff;
+		}
+
+		button:hover {
+			box-shadow: none;
+		}
+
+		input {
+			padding-left: 80px;
+			padding-top: 10px;
+		}
+
+		label {
+			color: blue;
+			font-size: 22px;
+			padding-left: 99px;
+		}
+
+		h2 {
+			text-align: center;
+			color: pink;
+			font-size: 20px;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>VideoInfo</h1>
+	<form>
+		<div>
+			<label>Select a video</label><br>
+			<input type="file" accept="video/*"/>
+		</div>
+		<button type="submit">GetInfo</button>
+	</form>
+
+	<h2 id="res"></h2>
+
+	<script>
+		const electron = require('electron');
+		const { ipcRenderer } = electron;
+
+		var form = document.querySelector('form');
+		form.addEventListener('submit',(event)=>{
+			event.preventDefault();
+			const { path } = document.querySelector('input').files[0];
+
+			console.log(path);
+
+			ipcRenderer.send('video:submit', path); 
+
+		});
+
+		ipcRenderer.on('video:metadata', (event, duration) => {
+			document.querySelector('#res').innerHTML = `Video is ${duration} sec `
+		})
+	</script>
+</body>
+</html>
+
