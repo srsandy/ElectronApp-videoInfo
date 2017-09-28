@@ -7,7 +7,7 @@ A simple Electron Application which returns you the length of an video given to 
     ```
      npm install  
      ```
-  - To run the project in you CLI run command
+  - To run the project from your CLI run command
     ```
     npm run electron
     ```
