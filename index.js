@@ -6,6 +6,7 @@
 */
 
 const electron = require('electron'); 
+//this is electron app
 const ffmpeg = require('fluent-ffmpeg');
 
 //ffmpeg is something that helps us with video and audio file to get its info
